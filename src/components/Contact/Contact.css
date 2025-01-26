@@ -33,7 +33,7 @@
 .contact-left {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .contact-left h1 {
@@ -172,7 +172,6 @@
 @media screen and (min-width: 1024px) {
     .contact {
         padding: 5rem;
-        gap: 4rem;
     }
 
     .contact-title h1 {
@@ -188,7 +187,7 @@
 
     .contact-left {
         flex: 1;
-        gap: 2rem;
+        gap: 1rem;
     }
 
     .contact-right {

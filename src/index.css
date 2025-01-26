@@ -1,6 +1,6 @@
 :root {
-  --primary-gradient: linear-gradient(267deg, #DA7 0.36%, #B923E1 100.64%);
-  --accent: #ff00ff;
+  --primary-gradient: linear-gradient(to right, #24c6dc, #514a9d);
+  --accent: #24c6dc;
   --input-bg: #32323c;
   --card-hover: linear-gradient(45deg,#3f0028,#582300);
   font-size: 16px;

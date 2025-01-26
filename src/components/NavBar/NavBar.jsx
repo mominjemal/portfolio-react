@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { Link, useLocation } from 'react-router-dom'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import './NavBar.css'
+import ThemeToggle from '../ThemeToggle/ThemeToggle'
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,11 +10,6 @@ const NavBar = () => {
 
   const closeMenu = () => {
     setIsOpen(false);
-  };
-
-  const scrollToContact = () => {
-    closeMenu();
-    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -59,16 +55,15 @@ const NavBar = () => {
         </li>
       </ul>
 
-      <button className="nav-mob-open" onClick={() => setIsOpen(true)}>
-        <FaBars />
-      </button>
-      <button className="nav-mob-close" onClick={() => setIsOpen(false)}>
-        <FaTimes />
-      </button>
-      
-      <button onClick={scrollToContact} className="nav-connect">
-        Connect with me
-      </button>
+      <div className="nav-right">
+        <ThemeToggle />
+        <button className="nav-mob-open" onClick={() => setIsOpen(true)}>
+          <FaBars />
+        </button>
+        <button className="nav-mob-close" onClick={() => setIsOpen(false)}>
+          <FaTimes />
+        </button>
+      </div>
     </div>
   )
 }
