@@ -60,19 +60,21 @@
     transform: scale(1.05);
 }
 
-.nav-mob-open {
+.nav-mob-open,
+.nav-mob-close {
     font-size: 1.5rem;
     cursor: pointer;
     z-index: 1000;
     display: block;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    padding: 0;
 }
 
 .nav-mob-close {
     display: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 1000;
     position: absolute;
     top: 1.875rem;
     right: 1.875rem;
