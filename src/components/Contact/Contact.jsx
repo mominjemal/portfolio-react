@@ -112,13 +112,13 @@ const Contact = () => {
                         <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer">
                             <FaLinkedin className="social-icon" />
                         </a>
-                        <a href="https://github.com/your-profile" target="_blank" rel="noopener noreferrer">
+                        <a href="https://github.com/mominjemal" target="_blank" rel="noopener noreferrer">
                             <FaGithub className="social-icon" />
                         </a>
-                        <a href="https://t.me/your-profile" target="_blank" rel="noopener noreferrer">
+                        <a href="https://t.me/@Bobjemal" target="_blank" rel="noopener noreferrer">
                             <FaTelegram className="social-icon" />
                         </a>
-                        <a href="https://instagram.com/your-profile" target="_blank" rel="noopener noreferrer">
+                        <a href="https://instagram.com/moma_jemal" target="_blank" rel="noopener noreferrer">
                             <FaInstagram className="social-icon" />
                         </a>
                     </div>
