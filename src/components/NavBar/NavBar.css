@@ -1,89 +1,170 @@
-.navbar{
+.navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 20px 170px;
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
 }
-.nav-menu{
-    display: flex;
-    list-style: none;
-    align-items: center;
-    gap: 60px;
-    font-size: 20px;
-}
-.nav-connect{
-    background: var(--primary-gradient);
-    border-radius: 50px;
-    padding: 20px 40px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: 0.5s;
-}
-.nav-connect:hover{
-    transform: scale(1.05);
-}
-.nav-menu li{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-}
-.nav-menu li img{
-    display: flex;
-    margin: auto;
-}
-.nav-mob-open, .nav-mob-close {
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
-}
-@media(min-width:320px) and (max-width:768px){
-    .navbar{
-        margin: 20px 50px;
-    }
-    .nav-connect{
-        display: none;
-    }
-    .nav-mob-open{
-        display: block;
-    }
-    .nav-mob-close{
-        display: block;
-        position: absolute;
-        top: 30px;
-        right: 30px;
-    }
-    .nav-menu{
-        position: fixed;
-        flex-direction: column;
-        align-items: center;
-        top: 0;
-        right: -100%;
-        gap: 30px;
-        background-color: var(--background);
-        width: 100%;
-        height: 100vh;
-        z-index: 999;
-        padding-top: 100px;
-        transition: 0.5s ease;
-    }
-    .nav-menu.active {
-        right: 0;
-    }
-}
-.nav-menu a {
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
     text-decoration: none;
     color: var(--text-primary);
-    transition: 0.3s;
+    z-index: 1000;
 }
+
+.nav-menu {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    right: -100%;
+    gap: 2rem;
+    background-color: var(--background);
+    width: 100%;
+    height: 100vh;
+    z-index: 999;
+    transition: 0.3s ease;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.nav-menu.active {
+    right: 0;
+    opacity: 1;
+    visibility: visible;
+}
+
+.nav-connect {
+    display: none;
+    border: none;
+    background: var(--primary-gradient);
+    color: white;
+    border-radius: 3.125rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    white-space: nowrap;
+}
+
+.nav-connect:hover {
+    transform: scale(1.05);
+}
+
+.nav-mob-open {
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1000;
+    display: block;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.nav-mob-close {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1000;
+    position: absolute;
+    top: 1.875rem;
+    right: 1.875rem;
+}
+
+.nav-menu.active ~ .nav-mob-open {
+    display: none;
+}
+
+.nav-menu.active ~ .nav-mob-close {
+    display: block;
+}
+
+.nav-menu li {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.nav-menu.active li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-menu a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 1.25rem;
+    transition: color 0.3s ease;
+    padding: 0.5rem 1rem;
+}
+
+.nav-menu a:hover,
 .nav-menu a.active {
     color: var(--accent);
 }
-.logo {
-    text-decoration: none;
-    color: var(--text-primary);
-    font-size: 24px;
-    font-weight: 600;
+
+@media (min-width: 1200px) {
+    .navbar {
+        padding: 1.25rem 5%;
+        gap: 2rem;
+    }
+
+    .nav-menu {
+        position: static;
+        flex-direction: row;
+        height: auto;
+        width: auto;
+        padding: 0;
+        gap: 2rem;
+        background: none;
+        margin: 0 auto;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+
+    .nav-menu li {
+        opacity: 1;
+        transform: none;
+    }
+
+    .nav-connect {
+        display: block;
+    }
+
+    .nav-mob-open,
+    .nav-mob-close {
+        display: none;
+    }
+
+    .nav-menu a {
+        font-size: 1rem;
+        position: relative;
+    }
+
+    .nav-menu a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        background: var(--accent);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+
+    .nav-menu a:hover::after,
+    .nav-menu a.active::after {
+        width: 100%;
+    }
 }
 
     

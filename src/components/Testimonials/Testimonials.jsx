@@ -1,46 +1,84 @@
-import React from 'react'
-import './Testimonials.css'
-import theme_pattern from '../../assets/asset/theme_pattern.svg'
-
-const testimonialData = [
-    {
-        content: "Working with this developer was an absolute pleasure. They delivered exactly what we needed and more.",
-        author: "John Smith",
-        position: "CEO, TechCorp"
-    },
-    {
-        content: "Exceptional work quality and great communication throughout the project.",
-        author: "Sarah Johnson",
-        position: "Product Manager"
-    },
-    {
-        content: "Highly skilled and professional. Would definitely recommend!",
-        author: "Mike Wilson",
-        position: "Startup Founder"
-    }
-];
+import React, { useState } from 'react';
+import './Testimonials.css';
+import { FaQuoteLeft, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const Testimonials = () => {
+    const [currentSlide, setCurrentSlide] = useState(0);
+
+    const testimonials = [
+        {
+            name: "John Doe",
+            position: "CEO at TechCorp",
+            image: "https://randomuser.me/api/portraits/men/1.jpg",
+            text: "Working with this developer was an absolute pleasure. Their attention to detail and technical expertise helped bring our vision to life."
+        },
+        {
+            name: "Sarah Smith",
+            position: "Product Manager",
+            image: "https://randomuser.me/api/portraits/women/1.jpg",
+            text: "Exceptional problem-solving skills and great communication throughout the project. Delivered everything on time and exceeded our expectations."
+        },
+        {
+            name: "Michael Brown",
+            position: "Startup Founder",
+            image: "https://randomuser.me/api/portraits/men/2.jpg",
+            text: "A truly talented developer who brings both technical skills and creative thinking to the table. Would definitely work with them again."
+        }
+    ];
+
+    const nextSlide = () => {
+        setCurrentSlide((prev) => (prev + 1) % testimonials.length);
+    };
+
+    const prevSlide = () => {
+        setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    };
+
     return (
-        <div className="testimonials">
+        <div id="testimonials" className="testimonials">
             <div className="testimonials-title">
-                <h1>Testimonials</h1>
-                <img src={theme_pattern} alt="" />
+                <h1>What Clients Say</h1>
             </div>
             
-            <div className="testimonials-container">
-                {testimonialData.map((testimonial, index) => (
-                    <div key={index} className="testimonial-card">
-                        <p className="testimonial-content">{testimonial.content}</p>
-                        <div className="testimonial-author">
-                            <h3>{testimonial.author}</h3>
-                            <p>{testimonial.position}</p>
+            <div className="testimonials-slider">
+                <button className="slider-btn prev" onClick={prevSlide}>
+                    <FaChevronLeft />
+                </button>
+                
+                <div className="testimonial-card">
+                    <div className="quote-icon">
+                        <FaQuoteLeft />
+                    </div>
+                    <p className="testimonial-text">{testimonials[currentSlide].text}</p>
+                    <div className="testimonial-author">
+                        <img 
+                            src={testimonials[currentSlide].image} 
+                            alt={testimonials[currentSlide].name} 
+                            className="author-image"
+                        />
+                        <div className="author-info">
+                            <h3>{testimonials[currentSlide].name}</h3>
+                            <p>{testimonials[currentSlide].position}</p>
                         </div>
                     </div>
+                </div>
+
+                <button className="slider-btn next" onClick={nextSlide}>
+                    <FaChevronRight />
+                </button>
+            </div>
+
+            <div className="slider-dots">
+                {testimonials.map((_, index) => (
+                    <button
+                        key={index}
+                        className={`dot ${index === currentSlide ? 'active' : ''}`}
+                        onClick={() => setCurrentSlide(index)}
+                    ></button>
                 ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Testimonials 
+export default Testimonials; 

@@ -3,8 +3,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 80px;
-    margin: 80px 170px;
+    gap: 2em;
+    margin: 1.5em 0;
 }
 
 .projects-title {
@@ -63,7 +63,6 @@
 
 .projects-container {
     padding: 2rem;
-    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -102,10 +101,51 @@
 
 .project-stats {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    color: var(--text-secondary);
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 0;
     font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.project-stars {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.like-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.like-button:hover {
+    color: #ff4b4b;
+}
+
+.like-button .liked {
+    color: #ff4b4b;
+    animation: likeAnimation 0.3s ease forwards;
+}
+
+@keyframes likeAnimation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .project-links {
@@ -137,8 +177,8 @@ h2 {
     gap: 15px;
     border-radius: 50px;
     border: 2px solid var(--text-primary);
-    padding: 30px 60px;
-    font-size: 22px;
+    padding: 1em 2em;
+    font-size: 1em;
     font-weight: 500;
     cursor: pointer;
     transition: 0.3s;
@@ -153,7 +193,7 @@ h2 {
     font-size: 24px;
 }
 
-@media (min-width: 320px) and (max-width: 768px) {
+@media (min-width: 320px){
     .projects {
         margin: 40px 20px;
     }

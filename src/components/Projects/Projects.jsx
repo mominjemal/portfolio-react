@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './Projects.css';
 import { BsArrowRight } from 'react-icons/bs';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaHeart } from 'react-icons/fa';
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [likes, setLikes] = useState(() => {
+        const savedLikes = localStorage.getItem('projectLikes');
+        return savedLikes ? JSON.parse(savedLikes) : {};
+    });
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -18,7 +22,11 @@ const Projects = () => {
                 // Filter out forked repositories and sort by stars
                 const filteredProjects = data
                     .filter(repo => !repo.fork)
-                    .sort((a, b) => b.stargazers_count - a.stargazers_count);
+                    .sort((a, b) => b.stargazers_count - a.stargazers_count)
+                    .map(project => ({
+                        ...project,
+                        likes: likes[project.id] || 0
+                    }));
                 
                 setProjects(filteredProjects);
             } catch (err) {
@@ -29,17 +37,28 @@ const Projects = () => {
         };
 
         fetchProjects();
-    }, []);
+    }, [likes]);
+
+    const handleLike = (projectId) => {
+        setLikes(prevLikes => {
+            const newLikes = {
+                ...prevLikes,
+                [projectId]: (prevLikes[projectId] || 0) + 1
+            };
+            localStorage.setItem('projectLikes', JSON.stringify(newLikes));
+            return newLikes;
+        });
+    };
 
     if (loading) return <div className="projects-container">Loading projects...</div>;
     if (error) return <div className="projects-container">Error: {error}</div>;
 
     return (
         <div id='projects' className="projects">
-            <div className="projects-title">
+            {/* <div className="projects-title">
                 <h1>My Projects</h1>
                 <div className="title-pattern"></div>
-            </div>
+            </div> */}
             <div className="projects-container">
                 <h2>My Projects</h2>
                 <div className="projects-grid">
@@ -48,16 +67,22 @@ const Projects = () => {
                             <h3>{project.name}</h3>
                             <p>{project.description || 'No description available'}</p>
                             <div className="project-stats">
-                                <span>⭐ {project.stargazers_count}</span>
-                                <span>🔄 {project.forks_count}</span>
+                                <span className="project-stars">⭐ {project.stargazers_count}</span>
+                                <button 
+                                    className="like-button"
+                                    onClick={() => handleLike(project.id)}
+                                >
+                                    <FaHeart className={likes[project.id] ? 'liked' : ''} />
+                                    <span>{likes[project.id] || 0}</span>
+                                </button>
                             </div>
                             <div className="project-links">
                                 <a href={project.html_url} target="_blank" rel="noopener noreferrer">
-                                    View on GitHub
+                                    <FaGithub /> Code
                                 </a>
                                 {project.homepage && (
                                     <a href={project.homepage} target="_blank" rel="noopener noreferrer">
-                                        Live Demo
+                                        <FaExternalLinkAlt /> Live Demo
                                     </a>
                                 )}
                             </div>

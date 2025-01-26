@@ -1,8 +1,7 @@
 import React from "react"
 import  './hero.css'
-import profile_img from '../../assets/asset/profile_img.svg'
 import { Link as AnchorLink } from 'react-scroll';
-
+import profile_img from '../../../public/images/profile_image.png'
 
 const Hero = () =>{
   return(

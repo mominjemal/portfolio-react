@@ -11,14 +11,16 @@ const NavBar = () => {
     setIsOpen(false);
   };
 
+  const scrollToContact = () => {
+    closeMenu();
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="navbar">
       <Link to="/" className="logo">Portfolio</Link>
-      <FaBars className="nav-mob-open" onClick={() => setIsOpen(!isOpen)} />
-
+      
       <ul className={`nav-menu ${isOpen ? 'active' : ''}`}>
-        <FaTimes className="nav-mob-close" onClick={() => setIsOpen(false)} />
-        
         <li>
           <Link to="/" onClick={closeMenu} 
                 className={location.pathname === '/' ? 'active' : ''}>
@@ -32,9 +34,15 @@ const NavBar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/services" onClick={closeMenu}
-                className={location.pathname === '/services' ? 'active' : ''}>
-            Services
+          <Link to="/skills" onClick={closeMenu}
+                className={location.pathname === '/skills' ? 'active' : ''}>
+            Skills
+          </Link>
+        </li>
+        <li>
+          <Link to="/testimonials" onClick={closeMenu}
+                className={location.pathname === '/testimonials' ? 'active' : ''}>
+            Testimonials
           </Link>
         </li>
         <li>
@@ -50,8 +58,17 @@ const NavBar = () => {
           </Link>
         </li>
       </ul>
+
+      <button className="nav-mob-open" onClick={() => setIsOpen(true)}>
+        <FaBars />
+      </button>
+      <button className="nav-mob-close" onClick={() => setIsOpen(false)}>
+        <FaTimes />
+      </button>
       
-      <Link to="/contact" className="nav-connect">Connect with me</Link>
+      <button onClick={scrollToContact} className="nav-connect">
+        Connect with me
+      </button>
     </div>
   )
 }
