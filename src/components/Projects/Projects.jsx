@@ -1,54 +1,39 @@
-import React from 'react'
-import './Projects.css'
-import { BsArrowRight } from 'react-icons/bs'
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
-
-const projectsData = [
-    {
-        title: "E-commerce Website",
-        description: "A full-featured e-commerce platform built with React and Node.js",
-        image: "https://via.placeholder.com/400x300",
-        github: "https://github.com",
-        live: "https://demo.com"
-    },
-    {
-        title: "Task Management App",
-        description: "A productivity app for managing daily tasks and projects",
-        image: "https://via.placeholder.com/400x300",
-        github: "https://github.com",
-        live: "https://demo.com"
-    },
-    {
-        title: "Weather Dashboard",
-        description: "Real-time weather information using weather API",
-        image: "https://via.placeholder.com/400x300",
-        github: "https://github.com",
-        live: "https://demo.com"
-    },
-    {
-        title: "Social Media Dashboard",
-        description: "Analytics dashboard for social media metrics",
-        image: "https://via.placeholder.com/400x300",
-        github: "https://github.com",
-        live: "https://demo.com"
-    },
-    {
-        title: "Portfolio Website",
-        description: "Personal portfolio website built with React",
-        image: "https://via.placeholder.com/400x300",
-        github: "https://github.com",
-        live: "https://demo.com"
-    },
-    {
-        title: "Blog Platform",
-        description: "A full-stack blog platform with user authentication",
-        image: "https://via.placeholder.com/400x300",
-        github: "https://github.com",
-        live: "https://demo.com"
-    }
-];
+import React, { useState, useEffect } from 'react';
+import './Projects.css';
+import { BsArrowRight } from 'react-icons/bs';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 const Projects = () => {
+    const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                const response = await fetch('https://api.github.com/users/mominjemal/repos?sort=updated&per_page=6');
+                if (!response.ok) throw new Error('Failed to fetch projects');
+                const data = await response.json();
+                
+                // Filter out forked repositories and sort by stars
+                const filteredProjects = data
+                    .filter(repo => !repo.fork)
+                    .sort((a, b) => b.stargazers_count - a.stargazers_count);
+                
+                setProjects(filteredProjects);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProjects();
+    }, []);
+
+    if (loading) return <div className="projects-container">Loading projects...</div>;
+    if (error) return <div className="projects-container">Error: {error}</div>;
+
     return (
         <div id='projects' className="projects">
             <div className="projects-title">
@@ -56,23 +41,29 @@ const Projects = () => {
                 <div className="title-pattern"></div>
             </div>
             <div className="projects-container">
-                {projectsData.map((project, index) => (
-                    <div key={index} className="project-card">
-                        <img src={project.image} alt={project.title} />
-                        <div className="project-info">
-                            <h3>{project.title}</h3>
-                            <p>{project.description}</p>
+                <h2>My Projects</h2>
+                <div className="projects-grid">
+                    {projects.map(project => (
+                        <div key={project.id} className="project-card">
+                            <h3>{project.name}</h3>
+                            <p>{project.description || 'No description available'}</p>
+                            <div className="project-stats">
+                                <span>⭐ {project.stargazers_count}</span>
+                                <span>🔄 {project.forks_count}</span>
+                            </div>
                             <div className="project-links">
-                                <a href={project.github} target="_blank" rel="noopener noreferrer">
-                                    <FaGithub /> Code
+                                <a href={project.html_url} target="_blank" rel="noopener noreferrer">
+                                    View on GitHub
                                 </a>
-                                <a href={project.live} target="_blank" rel="noopener noreferrer">
-                                    <FaExternalLinkAlt /> Live Demo
-                                </a>
+                                {project.homepage && (
+                                    <a href={project.homepage} target="_blank" rel="noopener noreferrer">
+                                        Live Demo
+                                    </a>
+                                )}
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
             
             <div className="projects-showmore">
@@ -80,7 +71,7 @@ const Projects = () => {
                 <BsArrowRight className="arrow-icon" />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Projects
+export default Projects;
