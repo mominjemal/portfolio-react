@@ -12,6 +12,8 @@
     margin-top: 3rem;
     width: 12.5rem;
     height: 12.5rem;
+    border-radius: 50%;
+    object-fit: cover;
 }
 .hero h1{
     text-align: center;
