@@ -1,6 +1,6 @@
 import React from "react"
 import  './hero.css'
-import { Link as AnchorLink } from 'react-scroll';
+import { Link } from 'react-router-dom';
 import profile_img from '../../../public/images/profile_image.jpg'
 
 const Hero = () =>{
@@ -9,9 +9,8 @@ const Hero = () =>{
     <img src={profile_img} alt="" />
      <h1><span>Hi I'm Momin, </span>frontend developer based in Ethiopia.</h1>
      <div className="hero-action">
-     <AnchorLink to='contact' offset={50} smooth={true}> <div  className="hero-connect">connect with me</div></AnchorLink>
-        <div className="hero-resume">My Resume</div>
-              
+     <Link to='/contact' offset={50} smooth={true}> <div  className="hero-connect">connect with me</div></Link>
+      <Link to='/projects' offset={50} smooth={true}> <div  className="hero-projects">view projects</div></Link>
      </div>
 </div>
 

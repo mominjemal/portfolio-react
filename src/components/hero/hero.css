@@ -52,16 +52,26 @@
     padding: 0 1rem;
     box-sizing: border-box;
 }
+.hero-action a {
+    text-decoration: none;
+}
 .hero-connect{
     background: var(--primary-gradient);
     border-radius: 3.125rem;
     padding: 1.25rem 2rem;
-    
+    text-decoration: none;
+    text-underline-position: none;
+    color: var(--text-primary);
     cursor: pointer;
     border: 0.125rem solid transparent;
     transition: border-color 0.3s ease;
 }
-
+.hero-projects{
+    color: var(--text-primary);
+    border: 1px solid var(--text-primary);
+    border-radius: 3.125rem;
+    padding: 1.25rem 2rem;
+}
 .hero-resume{
     border-radius: 3.125rem;
     padding: 1.25rem 2rem;
