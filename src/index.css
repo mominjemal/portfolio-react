@@ -1,0 +1,43 @@
+:root {
+  --primary-gradient: linear-gradient(267deg, #DA7 0.36%, #B923E1 100.64%);
+  --accent: #ff00ff;
+  --input-bg: #32323c;
+  --card-hover: linear-gradient(45deg,#3f0028,#582300);
+}
+
+:root[data-theme="light"] {
+  --background: #ffffff;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+}
+
+:root[data-theme="dark"] {
+  --background: #161513;
+  --text-primary: #FFFFFF;
+  --text-secondary: #D8D8D8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: 'outfit';
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.light-theme {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  transition: all 0.3s ease;
+}
+
+.dark-theme {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+}
